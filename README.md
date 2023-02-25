@@ -1,8 +1,39 @@
 # grubhub_crawler
 A Crawler for grab Restaurants information from GrubHub platform
 
-## Executing the crawler
+# Installation
+### Requirements
+This project runs on top of (Python 3.11.2)
 
+### To local installation
+```sh
+# download the project files
+git clone https://github.com/samukasmk/grubhub_crawler.git
+
+# create and activate a virtualenv
+python3 -m venv ./venv
+source ./venv/bin/activate
+
+# install the requirements
+pip install -r requirements.txt
+```
+
+# Collecting the data
+There is 2 types of data collections:
+
+**Simple collection:** collect just basic information such as:
+ - (from restaurant): restaurant name, address, city, state, stars, review count
+ - (from menu items): category name, item name, item description, item price
+ - (from modifiers items): modifier group name, modifier min, modifier max, option name, option price
+
+**Full collection:** collects much information as possible as too:
+ - (from menu items): category or item is available, item is popularity, item price for delivery or pickup, tax rate, ...
+ - (from modifiers items): modifier availability, option price for delivery or pickup, ...
+
+--collect-all-information
+
+### Executing the Simple collection
+This is the default option when you execute de command line, follow a example of command line execution for a **simple collection**:
 ```bash
 $ python grubhub_crawler.py \
   --urls https://www.grubhub.com/restaurant/dosa-love-893-e-el-camino-real-sunnyvale/3024935 \
@@ -10,7 +41,7 @@ $ python grubhub_crawler.py \
          https://www.grubhub.com/restaurant/impeckable-wings-901-nw-24th-st-san-antonio/3159434 \
          https://www.grubhub.com/restaurant/the-vegan-grill-5155-3rd-st-san-francisco/2994242
 ```
-
+Follow the sample of output for the **simple collection**:
 ```
 [GrubHub Restaurant Crawler]
 
@@ -65,7 +96,7 @@ Elapsed time: 0:00:04.063403
 ```
 
 ## Output files to CSV format
-
+For a **simple collection 
 ### Sample content of CSV file for (menu items):
 > **File path:** ./output_csv/menu_downloads_https___www.grubhub.com_restaurant_dosa_love_893_e_el_camino_real_sunnyvale_3024935.csv
 
@@ -95,3 +126,9 @@ Elapsed time: 0:00:04.063403
 | ...                     | ...              | ...              | ...                | ...              |
 
 
+# Development
+## File structure
+
+## Async architecture
+
+## React on layout on schema change

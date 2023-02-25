@@ -1,0 +1,5 @@
+aiohttp[speedups]==3.8.4
+aiocsv==1.2.3
+aiofiles==23.1.0
+lxml==4.9.2
+uvloop==0.17.0
