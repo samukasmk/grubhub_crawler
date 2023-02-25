@@ -1,5 +1,6 @@
 import aiohttp
 
+
 class GrubHubAPI:
     def __init__(self, client_id):
         self.client_id = client_id
@@ -25,7 +26,10 @@ class GrubHubAPI:
 
     async def __get_auth_token(self):
         auth_url = 'https://api-gtm.grubhub.com/auth'
-        auth_parameters = '{"client_id":"' + self.client_id + '","scope":"anonymous","device_id":1234567890,"brand":"GRUBHUB"}'
+        auth_parameters = '{"client_id":"' + self.client_id + '",' + \
+                          '"scope":"anonymous",' + \
+                          '"device_id":1234567890,' + \
+                          '"brand":"GRUBHUB"}'
         async with self.session.post(auth_url, data=auth_parameters, raise_for_status=True) as response:
             response_json = await response.json()
             self.auth_token = response_json['session_handle']['access_token']
@@ -41,4 +45,3 @@ class GrubHubAPI:
         menu_items_url = f"https://api-gtm.grubhub.com/restaurants/{restaurant_id}/menu_items/{item_id}"
         async with self.session.get(menu_items_url, raise_for_status=True) as response:
             return await response.json()
-

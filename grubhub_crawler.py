@@ -35,7 +35,7 @@ async def main():
             restaurant_url=restaurant_url,
             client_id=client_id,
             csv_folder=csv_folder,
-            verbose_csv=args.verbose_csv,
+            collect_all_information=args.collect_all_information,
             async_index=call_index + 1
         ).crawl_data()
           for call_index, restaurant_url in enumerate(args.urls)])

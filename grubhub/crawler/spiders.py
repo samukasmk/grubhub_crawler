@@ -19,13 +19,14 @@ class CrawlerResponse:
     csv_file_modifiers: Optional[str] = None
 
 
-class GrubhubRestaurantSpider():
-    def __init__(self, restaurant_url, client_id, csv_folder='./output_csv', verbose_csv=False, async_index=None):
+class GrubhubRestaurantSpider:
+    def __init__(self, restaurant_url, client_id, csv_folder='./output_csv',
+                 collect_all_information=False, async_index=None):
         self.restaurant_url = restaurant_url
         self.client_id = client_id
         self.async_index = async_index
-        self.data_extractor = DataExtractor(verbose_csv)
-        self.output_manager = OutputManager(restaurant_url, csv_folder, verbose_csv, self.async_index)
+        self.data_extractor = DataExtractor(collect_all_information)
+        self.output_manager = OutputManager(restaurant_url, csv_folder, collect_all_information, self.async_index)
 
     async def crawl_data(self):
         async with GrubHubAPI(self.client_id) as grubhub_api:

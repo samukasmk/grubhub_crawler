@@ -2,8 +2,8 @@ from grubhub.crawler.formaters import normalize_price_value
 
 
 class DataExtractor():
-    def __init__(self, verbose_csv=False):
-        self.verbose_csv = verbose_csv
+    def __init__(self, collect_all_information=False):
+        self.collect_all_information = collect_all_information
 
     def extract_restaurant_info(self, restaurant_data):
         return {"Restaurant Name": restaurant_data['restaurant']['name'],
@@ -23,7 +23,7 @@ class DataExtractor():
                           'Item Name': menu_item_data['name'],
                           'Item Description': menu_item_data['description'],
                           'Item Price': normalize_price_value(menu_item_data['price']['amount'])}
-                if self.verbose_csv:
+                if self.collect_all_information:
                     fields.update(
                         {'Category ID': menu_category['id'],
                          'Category Is Available': menu_category['available'],
@@ -54,7 +54,7 @@ class DataExtractor():
                           'Modifier Max': choice_category_list.get('max_choice_options', options_amount),
                           'Option Name': choice_option_list['description'],
                           'Option Price': normalize_price_value(choice_option_list['price']['amount'])}
-                if self.verbose_csv:
+                if self.collect_all_information:
                     fields.update(
                         {'Item ID': menu_item_data['id'],
                          'Item Name': menu_item_data['name'],

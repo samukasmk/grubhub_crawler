@@ -19,6 +19,7 @@ def parse_command_line_arguments():
                               'https://www.grubhub.com/restaurant/.../3024935 '
                               'https://www.grubhub.com/restaurant/.../3235140 '
                               'https://www.grubhub.com/restaurant/.../3159434'))
-    parser.add_argument('--verbose-csv', action='store_true',
-                        help='Add extra fields to csv to compare data crossing and data origin')
+    parser.add_argument('-a', '--collect-all-information', action='store_true',
+                        help=('Add available information fields to csv file as: tax rates, '
+                              'delivery or pickup price for a item, item and modifier availability'))
     return parser.parse_args()
