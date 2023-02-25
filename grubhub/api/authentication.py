@@ -13,7 +13,7 @@ class GrubHubOAuthClientID:
     async def __get_static_webpage(self):
         website_static_url = 'https://www.grubhub.com/eat/static-content-unauth?contentOnly=1'
         async with aiohttp.ClientSession() as session:
-            async with session.get(website_static_url) as response:
+            async with session.get(website_static_url, raise_for_status=True) as response:
                 return await response.text()
 
     def __extract_client_id(self, html_webpage):
