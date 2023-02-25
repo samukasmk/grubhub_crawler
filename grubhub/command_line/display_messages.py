@@ -3,7 +3,8 @@ from datetime import datetime
 
 
 def display_title():
-    print('[GrubHub Crawler]')
+    print()
+    print('[GrubHub Restaurant Crawler]')
     print()
     print('Getting restaurants data:')
 
