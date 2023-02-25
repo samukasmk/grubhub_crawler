@@ -19,15 +19,13 @@ def display_restaurants_info(crawled_restaurants):
         print(f'-> ({crawled_restaurant.async_index}) Restaurant URL: {crawled_restaurant.restaurant_url}')
 
         if crawled_restaurant.success:
-            print(f'       Crawler state: succes')
+            print(f'       Crawler state: success')
             for restaurant_key, restaurant_value in crawled_restaurant.restaurant_info.items():
                 print(f'       {restaurant_key}: {restaurant_value}')
             print(f'       CSV file (menu items): {crawled_restaurant.csv_file_menu}')
             print(f'       CSV file (items modifiers): {crawled_restaurant.csv_file_modifiers}')
 
         else:
-
-
             print(f'       Crawler state: failed')
             print(f'       Failure moment: {crawled_restaurant.failure_moment}')
             print(f'       Failure reason: {str(crawled_restaurant.failure_exception)}')
