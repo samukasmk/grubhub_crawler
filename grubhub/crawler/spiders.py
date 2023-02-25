@@ -3,7 +3,7 @@ from typing import Optional, Dict
 from dataclasses import dataclass
 from grubhub.api.api import GrubHubAPI
 from grubhub.crawler.extractors import DataExtractor
-from grubhub.crawler.output_managers import OutputManager
+from grubhub.crawler.output.managers import OutputManager
 from grubhub.crawler.formaters import get_restaurant_id_from_url
 
 

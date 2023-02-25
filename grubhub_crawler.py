@@ -6,7 +6,7 @@ import asyncio
 from grubhub.command_line.display_messages import (display_title, display_horizontal_rule,
                                                    display_restaurants_info, display_elapsed_time)
 from grubhub.command_line.argument_parser import parse_command_line_arguments
-from grubhub.command_line.csv_folder import ensure_csv_folder_exists
+from grubhub.crawler.output.csv_files import ensure_csv_folder_exists
 
 from grubhub.api.authentication import GrubHubOAuthClientID
 from grubhub.crawler.spiders import GrubhubRestaurantSpider
