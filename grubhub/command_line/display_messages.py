@@ -1,16 +1,37 @@
 import traceback
 from datetime import datetime
+from grubhub.crawler.output.csv_fields import csv_field_names
 
-
-def display_title():
+def display_program_title():
     print()
     print('[GrubHub Restaurant Crawler]')
-    print()
-    print('Getting restaurants data:')
 
 
 def display_horizontal_rule():
     print('-' * 160)
+
+
+def display_crawl_mode(is_collecting_all_information, csv_folder):
+    if is_collecting_all_information:
+        crawl_mode = 'MANY INFORMATION AS POSSIBLE'
+        menu_items_fields = ', '.join(csv_field_names['menu_items']['all_fields'])
+        items_modifiers_fields = ', '.join(csv_field_names['items_modifiers']['all_fields'])
+    else:
+        crawl_mode = 'BASIC INFORMATION'
+        menu_items_fields = ', '.join(csv_field_names['menu_items']['basic_fields'])
+        items_modifiers_fields = ', '.join(csv_field_names['items_modifiers']['basic_fields'])
+
+    print()
+    print(f'Crawling mode: [{crawl_mode}]')
+    display_horizontal_rule()
+    print(f'       Created folder to write the CSV files: {csv_folder}')
+    print(f'       CSV fields for file of (menu items): {menu_items_fields}')
+    print(f'       CSV fields for file of (items modifiers): {items_modifiers_fields}')
+
+
+def display_getting_title():
+    print()
+    print('Getting restaurants data:')
 
 
 def display_restaurants_info(crawled_restaurants):

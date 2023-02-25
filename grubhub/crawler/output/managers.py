@@ -31,18 +31,14 @@ class OutputManager():
 
     async def write_csv_menu_items(self, menu_items):
         file_path = self.__define_csv_file_path('menu_downloads')
-        field_names = csv_field_names['menu_items']['basic_fields']
-        if self.collect_all_information:
-            field_names = csv_field_names['menu_items']['all_fields']
-        await self.__create_empty_csv_file(file_path, field_names)
-        await self.__append_csv_lines(file_path, field_names, menu_items)
+        fields_type = 'all_fields' if self.collect_all_information else 'basic_fields'
+        await self.__create_empty_csv_file(file_path, csv_field_names['menu_items'][fields_type])
+        await self.__append_csv_lines(file_path, csv_field_names['menu_items'][fields_type], menu_items)
         return file_path
 
     async def write_csv_menu_modifiers(self, menu_modifiers):
         file_path = self.__define_csv_file_path('modifier_downloads')
-        field_names = csv_field_names['items_modifiers']['basic_fields']
-        if self.collect_all_information:
-            field_names = csv_field_names['items_modifiers']['all_fields']
-        await self.__create_empty_csv_file(file_path, field_names)
-        await self.__append_csv_lines(file_path, field_names, menu_modifiers)
+        fields_type = 'all_fields' if self.collect_all_information else 'basic_fields'
+        await self.__create_empty_csv_file(file_path, csv_field_names['items_modifiers'][fields_type])
+        await self.__append_csv_lines(file_path, csv_field_names['items_modifiers'][fields_type], menu_modifiers)
         return file_path
