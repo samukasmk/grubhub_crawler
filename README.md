@@ -214,41 +214,46 @@ The CSV fields can have more fields if activated the **Full data collection** wi
 | "13828721776" | "No Fuss No Muss Breakfast Burrito" | "Add A Side"              | "Bagel and Cream Cheese" | "4.99"             | "USD"                       | "4.99"                      | "USD"                                | "4.99"                    | "USD"                              | "0"                | "5"                | "3"                            | "True"                      | "13774873066"     | "CHOOSE_MANY_OPTIONAL"            |
 
 
-# Development
+# Architecture
 
 ## File structure
+The basic file structure of the project architecture
 
 ```
-grubhub_crawler
-├── grubhub
-│ ├── command_line
-│ │ ├── argument_parser.py
-│ │ └── display_messages.py
+grubhub_crawler             : Main project folder
+├── grubhub_crawler.py      : Script crawler runner
+├── grubhub                 : Project libraries
+│ ├── command_line 
+│ │ ├── argument_parser.py  : Define the command line arguments ex: --urls 
+│ │ └── display_messages.py : Display the program messages 
 │ ├── crawler
-│ │ └── restaurants.py
+│ │ └── restaurants.py      : Crawler integration logic of data getting, extractions and outputs 
 │ ├── input
-│ │ ├── formaters.py
+│ │ ├── formaters.py        : Normalizer functions
 │ │ ├── json
-│ │ │ └── extractors.py
+│ │ │ └── extractors.py     : Extracts and transforms the required data from obtained json data of rest api
 │ ├── output
 │ │ ├── csv
-│ │ │ ├── export_fields.py
-│ │ │ └── managers.py
+│ │ │ ├── export_fields.py  : Declare desired the data fields to outputs on CSV file 
+│ │ │ └── managers.py       : Manages CSV files data exportations
 │ └── rest_api
-│     ├── authentication.py
-│     └── grubhub_api.py
-├── grubhub_crawler.py
-└── output_csv
-  ├── menu_downloads_<retaurant_url>.csv
-  ├── menu_full_downloads_<retaurant_url>.csv
-  ├── modifier_downloads_<retaurant_url>.csv
-  ├── modifiers_downloads_<retaurant_url>.csv
-  └── modifiers_full_downloads_https_<retaurant_url>.csv
+│     ├── authentication.py : Get the initial clientId required to use on Rest API
+│     └── grubhub_api.py    : Communicates with the GrubHub Rest API
+└── output_csv              : Write the CSV files here
 ```
 
+## Advantage of Async calls
+The main difference about this tool from another libraries (such: [https://pypi.org/project/grubhub/](https://pypi.org/project/grubhub/)) is the asynchronous architecture speeding up the api data collection much more fast.
 
-## Async architecture
-...
+To a synchronous architecture collects the restaurant data with menu items and items modifiers takes around 35 secs, because it depends on for each menu item a specific request to get the items modifiers.
+
+But with async.io library it takes around 3 secs, accelerating the IO quantity demanded in the process.
 
 ## Reacting on schema change
-...
+As the GrubHub site is a constantly evolving product, it is quite common to have data schema changes in the future.
+
+Therefore, it is very simple to adapt these changes, you will have 4 specific points:
+- `grubhub.input.json.extractors.JsonDataExtractor`: mapping the new json keys the desired data is found
+- `grubhub.output.csv.export_fields.csv_field_names`: forwarding the field names, in case you want to rename some (the extractor must have the same fields as the exporter)
+- `grubhub.crawler.restaurants.GrubhubRestaurantSpider`: if any way of obtaining data is changed
+- `grubhub.rest_api.grubhub_api.GrubHubAPI`: if you have to change a url, or even if you want to include integration with a new endpoint
