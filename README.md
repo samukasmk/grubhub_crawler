@@ -26,11 +26,11 @@ There is 2 types of data collections:
  - (from menu items): category name, item name, item description, item price
  - (from modifiers items): modifier group name, modifier min, modifier max, option name, option price
 
-**Full data collection:** collects much information as possible as too:
+**Full data collection:** collects much information as possible as too *using command line argument* `--collect-all-information`:
  - (from menu items): category or item is available, item is popularity, item price for delivery or pickup, tax rate, ...
  - (from modifiers items): modifier availability, option price for delivery or pickup, ...
 
---collect-all-information
+
 
 ## Executing the Simple data collection
 This is the default option when you execute de command line, follow an example of command line execution for a **Simple data collection**:
