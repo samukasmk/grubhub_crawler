@@ -1,5 +1,5 @@
 import argparse
-from grubhub.crawler.formaters import get_restaurant_id_from_url
+from grubhub.input.formaters import get_restaurant_id_from_url
 
 
 def grubhub_restaurant_url(url):

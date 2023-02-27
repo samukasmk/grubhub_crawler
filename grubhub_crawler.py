@@ -7,10 +7,9 @@ from grubhub.command_line.display_messages import (display_program_title, displa
                                                    display_crawl_mode, display_getting_title,
                                                    display_restaurants_info, display_elapsed_time)
 from grubhub.command_line.argument_parser import parse_command_line_arguments
-from grubhub.crawler.output.csv_files import ensure_csv_folder_exists
-
-from grubhub.api.authentication import GrubHubOAuthClientID
-from grubhub.crawler.spiders import GrubhubRestaurantSpider
+from grubhub.rest_api.authentication import GrubHubOAuthClientID
+from grubhub.crawler.restaurants import GrubhubRestaurantSpider
+from grubhub.output.csv.managers import CsvOutputManager
 
 
 async def main():
@@ -23,7 +22,7 @@ async def main():
     # create csv folder if it not exists
     csv_folder = './output_csv'
     display_crawl_mode(args.collect_all_information, csv_folder)
-    await ensure_csv_folder_exists(csv_folder)
+    await CsvOutputManager.ensure_csv_folder_exists(csv_folder)
 
     # display getting restaurants title
     display_getting_title()

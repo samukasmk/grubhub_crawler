@@ -1,6 +1,6 @@
 import traceback
 from datetime import datetime
-from grubhub.crawler.output.csv_fields import csv_field_names
+from grubhub.output.csv.export_fields import csv_field_names
 
 def display_program_title():
     print()

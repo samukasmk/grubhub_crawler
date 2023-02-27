@@ -4,16 +4,21 @@ import aiofiles
 import aiofiles.os
 from aiocsv import AsyncDictWriter
 
-from grubhub.crawler.output.csv_fields import csv_field_names
+from grubhub.output.csv.export_fields import csv_field_names
 
 
-class OutputManager():
+class CsvOutputManager():
     def __init__(self, restaurant_url, csv_folder='./output_csv', collect_all_information=False, async_index=None):
         self.restaurant_url = restaurant_url
         self.collect_all_information = collect_all_information
         self.async_number = async_index
         self.regex = {'file_name': re.compile('[^a-zA-Z0-9\.]')}
         self.csv_folder = csv_folder
+
+    @classmethod
+    async def ensure_csv_folder_exists(cls, csv_folder):
+        if await aiofiles.os.path.exists(csv_folder) is False:
+            await aiofiles.os.makedirs(csv_folder)
 
     def __define_csv_file_path(self, prefix_name):
         full_type = '_full' if self.collect_all_information else ''

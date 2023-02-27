@@ -1,10 +1,10 @@
 import asyncio
 from typing import Optional, Dict
 from dataclasses import dataclass
-from grubhub.api.api import GrubHubAPI
-from grubhub.crawler.extractors import DataExtractor
-from grubhub.crawler.output.managers import OutputManager
-from grubhub.crawler.formaters import get_restaurant_id_from_url
+from grubhub.rest_api.grubhub_api import GrubHubAPI
+from grubhub.input.json.extractors import JsonDataExtractor
+from grubhub.output.csv.managers import CsvOutputManager
+from grubhub.input.formaters import get_restaurant_id_from_url
 
 
 @dataclass
@@ -25,8 +25,8 @@ class GrubhubRestaurantSpider:
         self.restaurant_url = restaurant_url
         self.client_id = client_id
         self.async_index = async_index
-        self.data_extractor = DataExtractor(collect_all_information)
-        self.output_manager = OutputManager(restaurant_url, csv_folder, collect_all_information, self.async_index)
+        self.data_extractor = JsonDataExtractor(collect_all_information)
+        self.output_manager = CsvOutputManager(restaurant_url, csv_folder, collect_all_information, self.async_index)
 
     async def crawl_data(self):
         async with GrubHubAPI(self.client_id) as grubhub_api:

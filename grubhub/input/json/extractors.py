@@ -1,7 +1,7 @@
-from grubhub.crawler.formaters import normalize_price_value
+from grubhub.input.formaters import normalize_price_value
 
 
-class DataExtractor():
+class JsonDataExtractor():
     def __init__(self, collect_all_information=False):
         self.collect_all_information = collect_all_information
 
