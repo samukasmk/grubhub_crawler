@@ -215,11 +215,40 @@ The CSV fields can have more fields if activated the **Full data collection** wi
 
 
 # Development
+
 ## File structure
-...
+
+```
+grubhub_crawler
+├── grubhub
+│ ├── command_line
+│ │ ├── argument_parser.py
+│ │ └── display_messages.py
+│ ├── crawler
+│ │ └── restaurants.py
+│ ├── input
+│ │ ├── formaters.py
+│ │ ├── json
+│ │ │ └── extractors.py
+│ ├── output
+│ │ ├── csv
+│ │ │ ├── export_fields.py
+│ │ │ └── managers.py
+│ └── rest_api
+│     ├── authentication.py
+│     └── grubhub_api.py
+├── grubhub_crawler.py
+└── output_csv
+  ├── menu_downloads_<retaurant_url>.csv
+  ├── menu_full_downloads_<retaurant_url>.csv
+  ├── modifier_downloads_<retaurant_url>.csv
+  ├── modifiers_downloads_<retaurant_url>.csv
+  └── modifiers_full_downloads_https_<retaurant_url>.csv
+```
+
 
 ## Async architecture
 ...
 
-## React on layout on schema change
+## Reacting on schema change
 ...
