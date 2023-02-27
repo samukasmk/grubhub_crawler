@@ -16,8 +16,9 @@ class OutputManager():
         self.csv_folder = csv_folder
 
     def __define_csv_file_path(self, prefix_name):
+        full_type = '_full' if self.collect_all_information else ''
         normalized_name = self.regex['file_name'].sub('_', self.restaurant_url)
-        return f'{self.csv_folder}/{prefix_name}_{normalized_name}.csv'
+        return f'{self.csv_folder}/{prefix_name}{full_type}_downloads_{normalized_name}.csv'
 
     async def __create_empty_csv_file(self, file_path, field_names):
         async with aiofiles.open(file_path, mode="w", encoding="utf-8", newline="") as afp:
@@ -30,14 +31,14 @@ class OutputManager():
             await writer.writerows(lines_dict_list)
 
     async def write_csv_menu_items(self, menu_items):
-        file_path = self.__define_csv_file_path('menu_downloads')
+        file_path = self.__define_csv_file_path('menu')
         fields_type = 'all_fields' if self.collect_all_information else 'basic_fields'
         await self.__create_empty_csv_file(file_path, csv_field_names['menu_items'][fields_type])
         await self.__append_csv_lines(file_path, csv_field_names['menu_items'][fields_type], menu_items)
         return file_path
 
     async def write_csv_menu_modifiers(self, menu_modifiers):
-        file_path = self.__define_csv_file_path('modifier_downloads')
+        file_path = self.__define_csv_file_path('modifiers')
         fields_type = 'all_fields' if self.collect_all_information else 'basic_fields'
         await self.__create_empty_csv_file(file_path, csv_field_names['items_modifiers'][fields_type])
         await self.__append_csv_lines(file_path, csv_field_names['items_modifiers'][fields_type], menu_modifiers)
